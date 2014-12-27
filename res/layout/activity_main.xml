@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    
+   android:background="#000000"
+ >
+     
+    <!-- Editext for Search -->
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="115dp"
+        android:text="Islam"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/txtPrayerTimes"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:text="Prayer Times"
+        android:textColor="#ffffff" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:onClick="getTime"
+        
+        android:src="@android:drawable/ic_lock_idle_alarm" />
+
+    <EditText android:id="@+id/inputSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search products.."
+        android:inputType="textVisiblePassword"
+        android:textColor="#ffffff"/>
+  
+    <!-- List View -->
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+       
+         />
+   <TextView
+            android:id="@+id/list_item_amount_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+    
+  
+</LinearLayout>
