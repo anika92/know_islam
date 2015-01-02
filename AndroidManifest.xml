@@ -31,7 +31,8 @@
                       <activity android:label="@string/app_name" android:name="names" />
                         <activity android:label="@string/app_name" android:name="salat" />
                             <activity android:label="@string/app_name" android:name="pray" /> 
-                              <activity
+                              
+             <activity
             android:name="com.example.NextActivity"
             android:label="Next Screen">
         </activity>
@@ -39,7 +40,7 @@
         <service android:name=".MyAlarmService"
                  android:enabled="true" />
          
-        <receiver android:name=".AlarmReceiver"/>
+        <receiver android:name=".MyReceiver"/>
                 <activity android:name=".WebViewPage" />
         
     </application>

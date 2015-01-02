@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+
+
+
   
 
 import android.app.Activity;
@@ -21,8 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
   
  public class pray extends MainActivity {
-	 final static int RQS_1 = 1;
+
 	 private TextView txtPrayerTimes;
+	
 	
 	    @Override
 		public void onCreate(Bundle savedInstanceState) {
@@ -59,18 +63,15 @@ import android.widget.Toast;
 	        for (int i = 0; i < prayerTimes.size(); i++) {
 	            txtPrayerTimes.append("\n" + prayerNames.get(i) + " - "
 	                    + prayerTimes.get(i));
-	       
-	            Intent myIntent = new Intent(pray.this, AlarmReceiver.class);
-		        PendingIntent pendingIntent = PendingIntent.getService(pray.this, 0, myIntent, 0);
-	            AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-	            alarmManager.set(AlarmManager.RTC_WAKEUP,  cal.getTimeInMillis(), pendingIntent);  
-	            
-	            
-	        }
-	       
+	      }
+	        
+ 
 	    }
 	    
-	
+	    
+
+	    	 
+
 	    
      }
   

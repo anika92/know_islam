@@ -3,16 +3,18 @@ package com.example.know_islam;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import java.util.HashMap;
 
-
-
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -31,7 +33,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	 // List view
+	// List view
     private ListView lv;
     Context context;
      private ImageView im;
@@ -45,12 +47,19 @@ public class MainActivity extends Activity {
      
     // ArrayList for Listview
     ArrayList<HashMap<String, String>> productList;
+   
+    
+    	 
+    
  
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle bundle) {
+
+    	final int RQS_1 = 1;
     	
-        super.onCreate(savedInstanceState);
+        super.onCreate(bundle);
         setContentView(R.layout.activity_main);
+        
         context=this;
         txtPrayerTimes = (TextView) findViewById(R.id.txtPrayerTimes);
         
@@ -139,11 +148,49 @@ public class MainActivity extends Activity {
                 // TODO Auto-generated method stub                         
             }
         });
-        
-        
+       
+        double latitude = 23.7;
+        double longitude = 90.3833;
+        double timezone = (Calendar.getInstance().getTimeZone()
+                .getOffset(Calendar.getInstance().getTimeInMillis()))
+                / (1000 * 60 * 60);
+        PrayTime prayers = new PrayTime();
+ 
+        prayers.setTimeFormat(prayers.Time12);
+        prayers.setCalcMethod(prayers.Makkah);
+        prayers.setAsrJuristic(prayers.Shafii);
+        prayers.setAdjustHighLats(prayers.AngleBased);
+        int[] offsets = { 0, 0, 0, 0, 0, 0, 0 }; // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
+        prayers.tune(offsets);
+ 
+        Date now = new Date();
+       
+Calendar cal = Calendar.getInstance();
+        cal.setTime(now);
+ 
+        ArrayList prayerTimes = prayers.getPrayerTimes(cal, latitude,
+                longitude, timezone);
+        ArrayList prayerNames = prayers.getTimeNames();
+        	 
+        AlarmManager[] alarmManager=new AlarmManager[24];
+        ArrayList<PendingIntent> intentArray = new ArrayList<PendingIntent>();
+     
+ 
+        for (int i = 0; i < offsets.length; i++) {
+        	
+            Intent intent = new Intent(context, MyAlarmService.class);
+         
+            PendingIntent pendingIntent = PendingIntent.getService(context,i, intent, 0);
+            alarmManager[i] = (AlarmManager) getSystemService(ALARM_SERVICE);
+            alarmManager[i].setRepeating(AlarmManager.RTC,System.currentTimeMillis(),offsets[i],pendingIntent);
+            
+            intentArray.add(pendingIntent);
+      }
+
+       
+       
     }  
   
-
 	public void getTime(View v) {
     	Intent int4 = new Intent(getApplicationContext(),
                 pray.class);
@@ -151,4 +198,5 @@ public class MainActivity extends Activity {
         // Retrive lat, lng using location API
        
     }
+	
 }

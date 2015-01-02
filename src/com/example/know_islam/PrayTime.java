@@ -1,12 +1,17 @@
 package com.example.know_islam;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.TimeZone;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
  
-public class PrayTime extends pray{
- 
+public class PrayTime extends MainActivity{
+	 
 // ---------------------- Global Variables --------------------
  private int calcMethod; // caculation method
  private int asrJuristic; // Juristic method for Asr
@@ -894,4 +899,9 @@ private void setNumIterations(int numIterations) {
 public ArrayList<String> getTimeNames() {
  return timeNames;
  }
+
+
+
+  
+
 }
